@@ -7,28 +7,25 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SetCollectionTest {
     private Set<Integer> numbers;
 
     @BeforeEach
     void setup() {
-        numbers = new HashSet<>();
-        numbers.add(1);
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
+        numbers = new HashSet<>(Arrays.asList(1, 1, 2, 3));
+
     }
 
     @Test
     @DisplayName("요구사항 1. Set의 Size를 확인")
     void getSetSize() {
-        assertEquals(3, numbers.size());
+        assertThat(numbers.size()).isEqualTo(3);
     }
 
     @ParameterizedTest

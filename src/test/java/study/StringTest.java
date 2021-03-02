@@ -2,6 +2,8 @@ package study;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -32,13 +34,21 @@ public class StringTest {
         assertThat(result).contains("1,2");
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"0,a", "1,b", "2,c"})
+    @DisplayName("abc 값이 주어졌을 때 String의 charAt() 메소드를 활용해 특정 위치의 문자를 가져오는 학습 테스트를 구현")
+    void getChar(int index, char expected) {
+        String data = "abc";
+        assertThat(data.charAt(index)).isEqualTo(expected);
+    }
+
     @Test
     @DisplayName("요구사항 3. charAt() 메소드를 활용해 특정 위치의 문자를 반환 및 StringIndexOutOfBoundsException 테스트")
-    void getChar() {
+    void checkStringIndexOutOfBoundsException() {
         String data = "abc";
         assertThatThrownBy(() -> {
             data.charAt(3);
-                }).isInstanceOf(IndexOutOfBoundsException.class)
-        .hasMessageContaining("Index: 2, Size: 2");
+        }).isInstanceOf(StringIndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range: 3");
     }
 }
